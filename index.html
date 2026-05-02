@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/Samsung/Downloads/index.html -->
-<html lang="pt-BR" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM — Oficina Informática</title>
-<script src="./CRM — Oficina Informática_files/supabase-js@2"></script>
-<link href="./CRM — Oficina Informática_files/css2" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0f0f11;--bg2:#161618;--bg3:#1e1e21;--bg4:#262629;--bg5:#2e2e32;
@@ -242,19 +242,19 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-logo">
-      <div class="login-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"></path></svg></div>
+      <div class="login-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
       <div><div class="login-title">CRM Oficina</div><div class="login-sub">Selecione seu perfil</div></div>
     </div>
     <div class="user-opts">
-      <div class="user-opt sel" onclick="selUser(this,&#39;jarbas&#39;)">
+      <div class="user-opt sel" onclick="selUser(this,'jarbas')">
         <div class="av" style="background:rgba(79,124,255,.2);color:#4f7cff;width:32px;height:32px">JA</div>
         <div><div class="user-opt-name">Jarbas</div><div class="user-opt-role">Administrador</div></div>
       </div>
-      <div class="user-opt" onclick="selUser(this,&#39;jailson&#39;)">
+      <div class="user-opt" onclick="selUser(this,'jailson')">
         <div class="av" style="background:rgba(34,197,94,.2);color:#22c55e;width:32px;height:32px">JL</div>
-        <div><div class="user-opt-name">Jailson</div><div class="user-opt-role">Vendas &amp; Orçamentos</div></div>
+        <div><div class="user-opt-name">Jailson</div><div class="user-opt-role">Vendas & Orçamentos</div></div>
       </div>
-      <div class="user-opt" onclick="selUser(this,&#39;vitor&#39;)">
+      <div class="user-opt" onclick="selUser(this,'vitor')">
         <div class="av" style="background:rgba(168,85,247,.2);color:#a855f7;width:32px;height:32px">VI</div>
         <div><div class="user-opt-name">Vitor</div><div class="user-opt-role">Pós-venda</div></div>
       </div>
@@ -268,45 +268,45 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="app" id="appRoot" style="display:none">
   <div class="sidebar">
     <div class="logo">
-      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"></path></svg></div>
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
       <div><div class="logo-text">CRM Oficina</div><div class="logo-sub">Informática</div></div>
     </div>
     <nav class="nav">
       <div class="nav-label">Funis</div>
       <div id="navFunnels"></div>
       <div class="nav-label" style="margin-top:14px">Outros</div>
-      <div class="nav-item" onclick="showView(&#39;clientes&#39;,this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
+      <div class="nav-item" onclick="showView('clientes',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         Clientes
       </div>
-      <div class="nav-item" onclick="showView(&#39;whatsapp&#39;,this)">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2zm0 17.25a7.734 7.734 0 01-3.946-1.081l-.283-.168-2.937.824.836-2.875-.185-.295A7.718 7.718 0 013.75 11.5c0-4.274 3.476-7.75 7.75-7.75s7.75 3.476 7.75 7.75-3.476 7.75-7.75 7.75z"></path></svg>
+      <div class="nav-item" onclick="showView('whatsapp',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2zm0 17.25a7.734 7.734 0 01-3.946-1.081l-.283-.168-2.937.824.836-2.875-.185-.295A7.718 7.718 0 013.75 11.5c0-4.274 3.476-7.75 7.75-7.75s7.75 3.476 7.75 7.75-3.476 7.75-7.75 7.75z"/></svg>
         WhatsApp
       </div>
-      <div class="nav-item" onclick="showView(&#39;funis&#39;,this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"></path></svg>
+      <div class="nav-item" onclick="showView('funis',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
         Gerenciar Funis
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="theme-toggle" id="themeToggle">
-        <button class="theme-btn active" id="btn-light" onclick="setTheme(&#39;light&#39;)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <button class="theme-btn active" id="btn-light" onclick="setTheme('light')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           Claro
         </button>
-        <button class="theme-btn" id="btn-dark" onclick="setTheme(&#39;dark&#39;)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+        <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
           Escuro
         </button>
-        <button class="theme-btn" id="btn-system" onclick="setTheme(&#39;system&#39;)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <button class="theme-btn" id="btn-system" onclick="setTheme('system')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           Sistema
         </button>
       </div>
       <div class="user-card" onclick="doLogout()">
         <div class="av" id="sbAv"></div>
         <div style="flex:1;min-width:0"><div class="user-name" id="sbName"></div><div class="user-role" id="sbRole"></div></div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="color:var(--text3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="color:var(--text3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
       </div>
     </div>
   </div>
@@ -318,28 +318,28 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="topbar">
         <div class="topbar-title" id="kanbanTitle"></div>
         <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           <input type="text" placeholder="Buscar..." oninput="filterKanban(this.value)">
         </div>
         <button class="btn btn-ghost" id="filterToggleBtn" onclick="toggleFilterBar()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
           Filtrar
         </button>
         <button class="btn btn-ghost" onclick="openCardModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Adicionar
         </button>
       </div>
       <div class="stats-bar" id="kanbanStats"></div>
       <div class="kanban-filters" id="kanbanFilters" style="display:none">
         <span class="kf-label">Temp:</span>
-        <button class="kf-chip hot" id="kf-quente" onclick="toggleKFilter(&#39;quente&#39;)">Quente</button>
-        <button class="kf-chip warm" id="kf-morno" onclick="toggleKFilter(&#39;morno&#39;)">Morno</button>
-        <button class="kf-chip cold" id="kf-frio" onclick="toggleKFilter(&#39;frio&#39;)">Frio</button>
+        <button class="kf-chip hot" id="kf-quente" onclick="toggleKFilter('quente')">Quente</button>
+        <button class="kf-chip warm" id="kf-morno" onclick="toggleKFilter('morno')">Morno</button>
+        <button class="kf-chip cold" id="kf-frio" onclick="toggleKFilter('frio')">Frio</button>
         <div class="kf-divider"></div>
         <span class="kf-label">Cat:</span>
-        <button class="kf-chip catA" id="kf-A" onclick="toggleKFilter(&#39;A&#39;)">Cat. A</button>
-        <button class="kf-chip catB" id="kf-B" onclick="toggleKFilter(&#39;B&#39;)">Cat. B</button>
+        <button class="kf-chip catA" id="kf-A" onclick="toggleKFilter('A')">Cat. A</button>
+        <button class="kf-chip catB" id="kf-B" onclick="toggleKFilter('B')">Cat. B</button>
         <button class="kf-chip" style="margin-left:auto;font-size:10px" onclick="clearKFilters()">Limpar filtros</button>
       </div>
       <div class="kanban-wrap"><div class="kanban" id="kanbanBoard"></div></div>
@@ -350,11 +350,11 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="topbar">
         <div class="topbar-title">Clientes</div>
         <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           <input type="text" placeholder="Buscar cliente..." id="clientSearch" oninput="renderClients()">
         </div>
         <button class="btn btn-ghost" id="toggleViewBtn" onclick="toggleClientView()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           Grade
         </button>
       </div>
@@ -388,19 +388,19 @@ textarea.form-input{resize:vertical;min-height:72px}
         <div class="wa-dot"></div>
         <span style="font-size:11px;color:var(--text3)">Conectado via WhatsApp Web</span>
         <button class="btn btn-ghost" onclick="reloadWA()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
           Recarregar
         </button>
       </div>
       <div class="wa-frame-wrap">
-        <iframe id="waFrame" src="./CRM — Oficina Informática_files/saved_resource.html" title="WhatsApp Web" allow="microphone; camera"></iframe>
-        <div class="wa-loading" id="waLoading" style="display: none;">
+        <iframe id="waFrame" src="https://web.whatsapp.com" title="WhatsApp Web" allow="microphone; camera"></iframe>
+        <div class="wa-loading" id="waLoading">
           <div class="wa-loading-icon">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2z"></path></svg>
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2z"/></svg>
           </div>
           <div style="font-size:13px;font-weight:500">Carregando WhatsApp Web...</div>
           <div style="font-size:11px;color:var(--text3);text-align:center;max-width:260px;line-height:1.6">Aguarde o QR Code aparecer, aponte a câmera do celular para escanear</div>
-          <button class="btn btn-ghost" onclick="document.getElementById(&#39;waLoading&#39;).style.display=&#39;none&#39;" style="margin-top:4px">Já carreguei</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('waLoading').style.display='none'" style="margin-top:4px">Já carreguei</button>
         </div>
       </div>
     </div>
@@ -410,7 +410,7 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="topbar">
         <div class="topbar-title">Gerenciar Funis</div>
         <button class="btn btn-ghost" onclick="openNewFunnelModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Novo Funil
         </button>
       </div>
@@ -430,13 +430,13 @@ textarea.form-input{resize:vertical;min-height:72px}
         <div class="detail-contact" id="dpContact"></div>
       </div>
       <button class="close-btn" onclick="closeDetail()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="tabs" id="dpTabs">
-      <div class="tab active" onclick="switchTab(this,&#39;resumo&#39;)">Resumo</div>
-      <div class="tab" onclick="switchTab(this,&#39;historico&#39;)">Histórico</div>
-      <div class="tab" onclick="switchTab(this,&#39;orcamentos&#39;)">Orçamentos</div>
+      <div class="tab active" onclick="switchTab(this,'resumo')">Resumo</div>
+      <div class="tab" onclick="switchTab(this,'historico')">Histórico</div>
+      <div class="tab" onclick="switchTab(this,'orcamentos')">Orçamentos</div>
     </div>
     <div class="detail-body">
       <div class="tab-content active" id="tab-resumo"></div>
@@ -452,7 +452,7 @@ textarea.form-input{resize:vertical;min-height:72px}
     <div class="modal-header">
       <div class="modal-title" id="modalTitle">Modal</div>
       <button class="close-btn" onclick="closeModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body" id="modalBody"></div>
@@ -467,7 +467,7 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="overlay" id="confirmOverlay">
   <div class="confirm-box">
     <div class="confirm-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" width="20" height="20"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6M14 11v6"></path><path d="M9 6V4h6v2"></path></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" width="20" height="20"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
     </div>
     <div class="confirm-title" id="confirmTitle">Confirmar exclusão</div>
     <div class="confirm-sub" id="confirmSub">Esta ação não pode ser desfeita.</div>
@@ -1416,6 +1416,5 @@ function updateColCounts(){
   });
 }
 </script>
-
-
-</body></html>
+</body>
+</html>
