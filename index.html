@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM — Oficina Informática</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -233,6 +234,33 @@ textarea.form-input{resize:vertical;min-height:72px}
 
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+
+/* REPORTS */
+.report-wrap{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:20px}
+.report-topbar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0;flex-wrap:wrap}
+.period-select{display:flex;gap:4px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);padding:3px}
+.period-btn{padding:5px 12px;border-radius:4px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text3);background:transparent;transition:all .15s}
+.period-btn.active{background:var(--accent);color:#fff}
+.report-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.metric-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.metric-val{font-size:28px;font-weight:700;font-family:'DM Mono',monospace;margin:4px 0}
+.metric-label{font-size:11px;color:var(--text3)}
+.metric-change{font-size:11px;margin-top:4px;font-weight:500}
+.metric-change.up{color:var(--green)}.metric-change.down{color:var(--red)}.metric-change.flat{color:var(--text3)}
+.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.chart-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.chart-sub{font-size:11px;color:var(--text3);margin-bottom:16px}
+.chart-wrap{position:relative;height:220px}
+.funnel-select{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);padding:5px 24px 5px 10px;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--text);outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a5a68'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;cursor:pointer}
+.conv-funnel{display:flex;flex-direction:column;gap:6px}
+.conv-row{display:flex;align-items:center;gap:10px}
+.conv-label{font-size:11px;color:var(--text2);width:140px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conv-bar-wrap{flex:1;height:22px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.conv-bar{height:100%;border-radius:4px;transition:width .4s ease;display:flex;align-items:center;padding-left:8px}
+.conv-bar-text{font-size:10px;font-weight:600;color:#fff;white-space:nowrap}
+.conv-pct{font-size:11px;color:var(--text3);width:40px;text-align:right;flex-shrink:0}
+.report-nav-section{margin-top:4px}
+.report-nav-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;padding:0 8px;margin:10px 0 5px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* AUTH SCREENS */
@@ -351,6 +379,10 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="nav-item" onclick="showView('funis',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
         Gerenciar Funis
+      </div>
+      <div class="nav-item" id="nav-relatorios" onclick="showView('relatorios',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Relatórios
       </div>
       <div class="nav-item" id="nav-config" onclick="showView('config',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
@@ -485,6 +517,58 @@ textarea.form-input{resize:vertical;min-height:72px}
       </div>
       <div style="padding:20px;overflow-y:auto;flex:1">
         <div id="funisList"></div>
+      </div>
+    </div>
+
+    <!-- RELATÓRIOS -->
+    <div id="view-relatorios" class="content" style="display:none">
+      <div class="report-topbar">
+        <div class="topbar-title" style="font-size:14px;font-weight:600;flex:1">Relatórios</div>
+        <select class="funnel-select" id="reportFunnelSel" onchange="renderReports()">
+          <option value="all">Todos os funis</option>
+        </select>
+        <div class="period-select" id="periodSel">
+          <button class="period-btn active" onclick="setPeriod('7',this)">7 dias</button>
+          <button class="period-btn" onclick="setPeriod('30',this)">30 dias</button>
+          <button class="period-btn" onclick="setPeriod('90',this)">90 dias</button>
+          <button class="period-btn" onclick="setPeriod('all',this)">Tudo</button>
+        </div>
+      </div>
+      <div class="report-wrap">
+        <!-- METRIC CARDS -->
+        <div class="report-grid" id="metricCards"></div>
+        <!-- CHARTS ROW 1 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" id="chartsRow1">
+          <div class="chart-card">
+            <div class="chart-title">Leads por período</div>
+            <div class="chart-sub">Entradas no funil ao longo do tempo</div>
+            <div class="chart-wrap"><canvas id="chartLeads"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Temperatura dos leads</div>
+            <div class="chart-sub">Distribuição atual por temperatura</div>
+            <div class="chart-wrap"><canvas id="chartTemp"></canvas></div>
+          </div>
+        </div>
+        <!-- CONVERSION FUNNEL -->
+        <div class="chart-card" id="convFunnelCard">
+          <div class="chart-title">Taxa de Conversão por Etapa</div>
+          <div class="chart-sub">Quantos leads avançam em cada etapa do funil</div>
+          <div class="conv-funnel" id="convFunnel"></div>
+        </div>
+        <!-- CHARTS ROW 2 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="chart-card">
+            <div class="chart-title">Por Responsável</div>
+            <div class="chart-sub">Distribuição de leads por membro do time</div>
+            <div class="chart-wrap"><canvas id="chartResp"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Por Origem</div>
+            <div class="chart-sub">De onde vêm os leads (funil de vendas)</div>
+            <div class="chart-wrap"><canvas id="chartOrigem"></canvas></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -929,7 +1013,7 @@ function buildNav(){
 // VIEWS
 // ============================================================
 function showView(name,el){
-  ['view-kanban','view-clientes','view-whatsapp','view-funis','view-config'].forEach(v=>{
+  ['view-kanban','view-clientes','view-whatsapp','view-funis','view-config','view-relatorios'].forEach(v=>{
     const e=document.getElementById(v);if(e)e.style.display='none';
   });
   document.getElementById('view-'+name).style.display='flex';
@@ -939,6 +1023,7 @@ function showView(name,el){
   if(name==='clientes')renderClients();
   if(name==='funis')renderFunisList();
   if(name==='config')renderUserList();
+  if(name==='relatorios')initReports();
 }
 
 function showFunnel(id,el){
@@ -1735,6 +1820,235 @@ async function updateMyAccount() {
     document.getElementById('sbName').textContent=name;
   }
   hideLoading();document.getElementById('myNewPass').value='';toast('Conta atualizada!');
+}
+
+// ============================================================
+// REPORTS
+// ============================================================
+let reportPeriod = '30';
+let chartInstances = {};
+
+function setPeriod(p, btn) {
+  reportPeriod = p;
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderReports();
+}
+
+function initReports() {
+  // Populate funnel selector
+  const sel = document.getElementById('reportFunnelSel');
+  if(sel) {
+    sel.innerHTML = '<option value="all">Todos os funis</option>' +
+      funnels.map(f => `<option value="${f.id}">${f.name}</option>`).join('');
+  }
+  renderReports();
+}
+
+function getFilteredCards() {
+  const fid = (document.getElementById('reportFunnelSel')||{}).value || 'all';
+  const now = Date.now();
+  const days = reportPeriod === 'all' ? 99999 : parseInt(reportPeriod);
+  const cutoff = now - days * 24 * 3600 * 1000;
+  let cards = [];
+  funnels.forEach(f => {
+    if(fid !== 'all' && f.id !== fid) return;
+    f.cards.forEach(c => cards.push({...c, funnelId: f.id, funnelName: f.name, funnelType: f.type, funnelCols: f.cols}));
+  });
+  return {
+    all: cards,
+    period: cards.filter(c => new Date(c.criado).getTime() >= cutoff)
+  };
+}
+
+function getPrevCards() {
+  const days = reportPeriod === 'all' ? 99999 : parseInt(reportPeriod);
+  const now = Date.now();
+  const cutoff = now - days * 24 * 3600 * 1000;
+  const prevCutoff = cutoff - days * 24 * 3600 * 1000;
+  const fid = (document.getElementById('reportFunnelSel')||{}).value || 'all';
+  let cards = [];
+  funnels.forEach(f => {
+    if(fid !== 'all' && f.id !== fid) return;
+    f.cards.forEach(c => cards.push({...c}));
+  });
+  return cards.filter(c => {
+    const t = new Date(c.criado).getTime();
+    return t >= prevCutoff && t < cutoff;
+  });
+}
+
+function renderReports() {
+  const {all, period} = getFilteredCards();
+  const prev = getPrevCards();
+  renderMetricCards(period, prev, all);
+  renderLeadsChart(period);
+  renderTempChart(all);
+  renderConvFunnel(all);
+  renderRespChart(all);
+  renderOrigemChart(all);
+}
+
+function renderMetricCards(period, prev, all) {
+  const fid = (document.getElementById('reportFunnelSel')||{}).value || 'all';
+  
+  // Count closed/delivered
+  const closed = all.filter(c => c.col === 'fechado' || c.col === 'entregue').length;
+  const closedPrev = prev.filter(c => c.col === 'fechado' || c.col === 'entregue').length;
+  const convRate = all.length > 0 ? Math.round((closed/all.length)*100) : 0;
+  const prevRate = prev.length > 0 ? Math.round((closedPrev/prev.length)*100) : 0;
+  
+  // Hot leads
+  const hot = all.filter(c => c.temp === 'quente').length;
+  
+  const change = (curr, p) => {
+    if(p === 0) return {text: '—', cls: 'flat'};
+    const d = curr - p;
+    const pct = Math.round(Math.abs(d/p)*100);
+    return d > 0 ? {text: `+${pct}% vs período ant.`, cls: 'up'} : d < 0 ? {text: `-${pct}% vs período ant.`, cls: 'down'} : {text: '= período ant.', cls: 'flat'};
+  };
+  
+  const p1 = change(period.length, prev.length);
+  const p2 = change(convRate, prevRate);
+  
+  document.getElementById('metricCards').innerHTML = `
+    <div class="metric-card">
+      <div class="metric-label">Leads no período</div>
+      <div class="metric-val" style="color:var(--accent)">${period.length}</div>
+      <div class="metric-change ${p1.cls}">${p1.text}</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Total em aberto</div>
+      <div class="metric-val" style="color:var(--amber)">${all.filter(c=>c.col!=='fechado'&&c.col!=='entregue'&&c.col!=='perdido').length}</div>
+      <div class="metric-change flat">todos os funis</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Taxa de conversão</div>
+      <div class="metric-val" style="color:var(--green)">${convRate}%</div>
+      <div class="metric-change ${p2.cls}">${p2.text}</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Leads quentes</div>
+      <div class="metric-val" style="color:#f87171">${hot}</div>
+      <div class="metric-change flat">atualmente</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Fechados / Entregues</div>
+      <div class="metric-val" style="color:var(--teal)">${closed}</div>
+      <div class="metric-change flat">total geral</div>
+    </div>`;
+}
+
+function destroyChart(id) {
+  if(chartInstances[id]) { chartInstances[id].destroy(); delete chartInstances[id]; }
+}
+
+function chartColors() {
+  return ['#4f7cff','#22c55e','#f59e0b','#ef4444','#a855f7','#14b8a6','#ec4899','#f97316'];
+}
+
+function renderLeadsChart(period) {
+  destroyChart('leads');
+  const days = reportPeriod === 'all' ? 30 : parseInt(reportPeriod);
+  const labels = [];
+  const data = [];
+  const now = new Date();
+  const step = days <= 7 ? 1 : days <= 30 ? 1 : 7;
+  const buckets = Math.min(days/step, 30);
+  for(let i = buckets-1; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i*step);
+    labels.push(d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
+    const start = new Date(d); start.setDate(start.getDate() - step);
+    data.push(period.filter(c => {
+      const t = new Date(c.criado);
+      return t >= start && t <= d;
+    }).length);
+  }
+  const ctx = document.getElementById('chartLeads');
+  if(!ctx) return;
+  chartInstances.leads = new Chart(ctx, {
+    type:'line',
+    data:{labels,datasets:[{label:'Leads',data,borderColor:'#4f7cff',backgroundColor:'rgba(79,124,255,.1)',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#4f7cff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#5a5a68',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#5a5a68',font:{size:10},stepSize:1}}}}
+  });
+}
+
+function renderTempChart(all) {
+  destroyChart('temp');
+  const vendas = all.filter(c => c.funnelType === 'vendas');
+  const hot = vendas.filter(c=>c.temp==='quente').length;
+  const warm = vendas.filter(c=>c.temp==='morno').length;
+  const cold = vendas.filter(c=>c.temp==='frio').length;
+  const ctx = document.getElementById('chartTemp');
+  if(!ctx) return;
+  chartInstances.temp = new Chart(ctx, {
+    type:'doughnut',
+    data:{labels:['Quente','Morno','Frio'],datasets:[{data:[hot,warm,cold],backgroundColor:['#ef4444','#f59e0b','#6366f1'],borderWidth:0,hoverOffset:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#9a9aa8',font:{size:11},boxWidth:12,padding:12}}}}
+  });
+}
+
+function renderConvFunnel(all) {
+  const fid = (document.getElementById('reportFunnelSel')||{}).value || 'all';
+  const el = document.getElementById('convFunnel');
+  if(!el) return;
+  
+  // Get relevant funnels
+  const targetFunnels = fid === 'all' ? funnels : funnels.filter(f=>f.id===fid);
+  let html = '';
+  
+  targetFunnels.forEach(f => {
+    const fCards = all.filter(c=>c.funnelId===f.id);
+    if(fCards.length === 0) return;
+    const total = fCards.length;
+    if(targetFunnels.length > 1) html += `<div style="font-size:11px;font-weight:600;color:var(--text2);margin:10px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border)">${f.name}</div>`;
+    f.cols.forEach((col,i) => {
+      const count = fCards.filter(c=>c.col===col.id).length;
+      const pct = total > 0 ? Math.round((count/total)*100) : 0;
+      html += `<div class="conv-row">
+        <div class="conv-label">${col.name}</div>
+        <div class="conv-bar-wrap">
+          <div class="conv-bar" style="width:${pct}%;background:${col.color}">
+            ${pct>8?`<span class="conv-bar-text">${count}</span>`:''}
+          </div>
+        </div>
+        <div class="conv-pct">${pct}%</div>
+      </div>`;
+    });
+  });
+  el.innerHTML = html || '<div style="color:var(--text3);font-size:12px;padding:12px">Sem dados suficientes</div>';
+}
+
+function renderRespChart(all) {
+  destroyChart('resp');
+  const respCount = {};
+  all.forEach(c => { respCount[c.resp] = (respCount[c.resp]||0)+1; });
+  const labels = Object.keys(respCount).map(k=>USERS[k]?.name||k);
+  const data = Object.values(respCount);
+  const ctx = document.getElementById('chartResp');
+  if(!ctx) return;
+  chartInstances.resp = new Chart(ctx, {
+    type:'bar',
+    data:{labels,datasets:[{label:'Leads',data,backgroundColor:chartColors().slice(0,labels.length),borderRadius:4,borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#9a9aa8',font:{size:11}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#5a5a68',font:{size:10},stepSize:1}}}}
+  });
+}
+
+function renderOrigemChart(all) {
+  destroyChart('origem');
+  const vendas = all.filter(c=>c.funnelType==='vendas'&&c.origem);
+  const origCount = {};
+  vendas.forEach(c=>{origCount[c.origem]=(origCount[c.origem]||0)+1;});
+  const labels = Object.keys(origCount);
+  const data = Object.values(origCount);
+  const ctx = document.getElementById('chartOrigem');
+  if(!ctx) return;
+  chartInstances.origem = new Chart(ctx, {
+    type:'doughnut',
+    data:{labels,datasets:[{data,backgroundColor:chartColors().slice(0,labels.length),borderWidth:0,hoverOffset:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#9a9aa8',font:{size:11},boxWidth:12,padding:10}}}}
+  });
 }
 
 // ============================================================
