@@ -826,24 +826,78 @@ let funnels = [
 // LOGIN
 // ============================================================
 function selUser(el,key){document.querySelectorAll('.user-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');loginSel=key;}
+
+function showLogin(){
+  document.getElementById('authLogin').style.display='';
+  document.getElementById('authForgot').style.display='none';
+  const e=document.getElementById('loginError');if(e)e.classList.remove('show');
+}
+function showForgot(){
+  document.getElementById('authLogin').style.display='none';
+  document.getElementById('authForgot').style.display='';
+}
+function togglePass(inputId,btn){
+  const inp=document.getElementById(inputId);
+  if(inp.type==='password'){inp.type='text';btn.style.color='var(--accent)';}
+  else{inp.type='password';btn.style.color='';}
+}
+
 async function doLogin(){
-  currentUser=loginSel;
-  const u=USERS[currentUser];
-  document.getElementById('loginScreen').style.display='none';
+  const email=(document.getElementById('loginEmail')||{}).value||'';
+  const pass=(document.getElementById('loginPass')||{}).value||'';
+  const errEl=document.getElementById('loginError');
+  if(errEl)errEl.classList.remove('show');
+  if(!email||!pass){if(errEl){errEl.textContent='Preencha e-mail e senha.';errEl.classList.add('show');}return;}
+  showLoading('Entrando...');
+  try{
+    const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+    if(error){hideLoading();if(errEl){errEl.textContent=error.message==='Invalid login credentials'?'E-mail ou senha incorretos.':error.message;errEl.classList.add('show');}return;}
+    await initApp(data.user);
+  }catch(e){hideLoading();if(errEl){errEl.textContent='Erro ao conectar. Tente novamente.';errEl.classList.add('show');}}
+}
+
+async function doForgot(){
+  const email=(document.getElementById('forgotEmail')||{}).value||'';
+  const errEl=document.getElementById('forgotError');
+  const sucEl=document.getElementById('forgotSuccess');
+  if(errEl)errEl.classList.remove('show');if(sucEl)sucEl.classList.remove('show');
+  if(!email){if(errEl){errEl.textContent='Informe seu e-mail.';errEl.classList.add('show');}return;}
+  showLoading('Enviando...');
+  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin});
+  hideLoading();
+  if(error){if(errEl){errEl.textContent=error.message;errEl.classList.add('show');}}
+  else{if(sucEl){sucEl.textContent='Link enviado! Verifique seu e-mail.';sucEl.classList.add('show');}}
+}
+
+async function initApp(authUser){
+  let userData=await dbGetUserByAuthId(authUser.id);
+  if(!userData){
+    userData={id:'user_'+Date.now(),auth_id:authUser.id,name:authUser.email.split('@')[0],email:authUser.email,role:'admin',permissions:PERMS_PRESETS.admin.perms,active:true};
+    await dbSaveUser(userData);
+  }
+  currentUserData=userData;
+  currentPerms=userData.permissions||PERMS_PRESETS.admin.perms;
+  currentUser=userData.name.toLowerCase().split(' ')[0]||'user';
+  document.getElementById('authScreen').style.display='none';
   document.getElementById('appRoot').style.display='flex';
+  const uColor=PERMS_PRESETS[userData.role]?.color||'#4f7cff';
+  const initials=userData.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
   const av=document.getElementById('sbAv');
-  av.textContent=u.initials;av.style.background=u.color+'25';av.style.color=u.color;
-  av.style.width='30px';av.style.height='30px';
-  document.getElementById('sbName').textContent=u.name;
-  document.getElementById('sbRole').textContent=u.role;
+  av.textContent=initials;av.style.background=uColor+'25';av.style.color=uColor;av.style.width='30px';av.style.height='30px';
+  document.getElementById('sbName').textContent=userData.name;
+  document.getElementById('sbRole').textContent=PERMS_PRESETS[userData.role]?.label||userData.role;
+  const mn=document.getElementById('myName');if(mn)mn.value=userData.name;
   showLoading('Carregando dados...');
   await dbLoadAll();
   hideLoading();
   buildNav();
-  showFunnel('vendas');
+  const firstFunnel=funnels.find(f=>hasPermission(f.type==='vendas'?'vendas':'servicos'))||funnels[0];
+  if(firstFunnel)showFunnel(firstFunnel.id);
   document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
   const tb=document.getElementById('btn-'+currentTheme);if(tb)tb.classList.add('active');
-  toast('Bem-vindo, '+u.name+'!');
+  const cfgNav=document.getElementById('nav-config');
+  if(cfgNav)cfgNav.style.display=hasPermission('configuracoes')?'':'none';
+  toast('Bem-vindo, '+userData.name+'!');
 }
 async function doLogout(){
   await sb.auth.signOut();
