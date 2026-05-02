@@ -234,33 +234,98 @@ textarea.form-input{resize:vertical;min-height:72px}
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* AUTH SCREENS */
+.auth-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:400}
+.auth-card{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:32px;width:380px;max-width:95vw}
+.auth-logo{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+.auth-logo-icon{width:38px;height:38px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.auth-logo-icon svg{width:20px;height:20px;fill:#fff}
+.auth-title{font-size:20px;font-weight:600}
+.auth-sub{font-size:12px;color:var(--text3);margin-top:3px}
+.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:var(--rs);padding:10px 13px;font-size:12px;color:#f87171;display:none}
+.auth-error.show{display:block}
+.auth-success{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:var(--rs);padding:10px 13px;font-size:12px;color:#4ade80;display:none}
+.auth-success.show{display:block}
+.auth-link{font-size:12px;color:var(--accent);cursor:pointer;text-align:center;margin-top:4px;transition:opacity .15s}
+.auth-link:hover{opacity:.75}
+.remember-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.remember-row input{width:14px;height:14px;cursor:pointer;accent-color:var(--accent)}
+.input-wrap{position:relative}
+.input-wrap .form-input{padding-right:36px}
+.input-eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text3);background:none;border:none;padding:2px;display:flex;align-items:center}
+.input-eye:hover{color:var(--text2)}
+
+/* SETTINGS */
+.settings-wrap{flex:1;overflow-y:auto;padding:20px}
+.settings-section{margin-bottom:28px}
+.settings-section-title{font-size:13px;font-weight:600;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.user-list{display:flex;flex-direction:column;gap:8px}
+.user-list-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:12px}
+.user-list-item .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.user-list-name{font-size:13px;font-weight:500}
+.user-list-email{font-size:11px;color:var(--text3)}
+.user-list-role{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:auto}
+.perm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.perm-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:7px 10px;background:var(--bg3);border-radius:var(--rs);border:1px solid var(--border)}
+.perm-item input{width:14px;height:14px;cursor:pointer;accent-color:var(--accent);flex-shrink:0}
+.profile-preset{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.preset-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text2);transition:all .15s}
+.preset-btn:hover{border-color:var(--border3);color:var(--text)}
+.preset-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.inactive-badge{font-size:10px;background:rgba(239,68,68,.12);color:#f87171;padding:2px 7px;border-radius:10px}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-screen" id="loginScreen">
-  <div class="login-card">
-    <div class="login-logo">
-      <div class="login-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
-      <div><div class="login-title">CRM Oficina</div><div class="login-sub">Selecione seu perfil</div></div>
+<!-- AUTH SCREENS -->
+<div class="auth-screen" id="authScreen">
+  <!-- LOGIN -->
+  <div class="auth-card" id="authLogin">
+    <div class="auth-logo">
+      <div class="auth-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
+      <div><div class="auth-title">CRM Oficina</div><div class="auth-sub">Faça login para continuar</div></div>
     </div>
-    <div class="user-opts">
-      <div class="user-opt sel" onclick="selUser(this,'jarbas')">
-        <div class="av" style="background:rgba(79,124,255,.2);color:#4f7cff;width:32px;height:32px">JA</div>
-        <div><div class="user-opt-name">Jarbas</div><div class="user-opt-role">Administrador</div></div>
+    <div class="auth-form">
+      <div class="auth-error" id="loginError"></div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input class="form-input" id="loginEmail" type="email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')doLogin()">
       </div>
-      <div class="user-opt" onclick="selUser(this,'jailson')">
-        <div class="av" style="background:rgba(34,197,94,.2);color:#22c55e;width:32px;height:32px">JL</div>
-        <div><div class="user-opt-name">Jailson</div><div class="user-opt-role">Vendas & Orçamentos</div></div>
+      <div class="form-group">
+        <label class="form-label">Senha</label>
+        <div class="input-wrap">
+          <input class="form-input" id="loginPass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+          <button class="input-eye" onclick="togglePass('loginPass',this)" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="user-opt" onclick="selUser(this,'vitor')">
-        <div class="av" style="background:rgba(168,85,247,.2);color:#a855f7;width:32px;height:32px">VI</div>
-        <div><div class="user-opt-name">Vitor</div><div class="user-opt-role">Pós-venda</div></div>
+      <div class="remember-row">
+        <input type="checkbox" id="rememberMe" checked>
+        <label for="rememberMe">Lembrar de mim</label>
       </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px;font-size:13px" onclick="doLogin()">Entrar</button>
+      <div class="auth-link" onclick="showForgot()">Esqueci minha senha</div>
     </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:9px" onclick="doLogin()">Entrar</button>
-    <div style="font-size:10px;color:var(--text3);text-align:center;margin-top:10px">MVP Fase 1 — Gestão de usuários na Fase 2</div>
+  </div>
+  <!-- FORGOT PASSWORD -->
+  <div class="auth-card" id="authForgot" style="display:none">
+    <div class="auth-logo">
+      <div class="auth-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
+      <div><div class="auth-title">Recuperar senha</div><div class="auth-sub">Enviaremos um link por e-mail</div></div>
+    </div>
+    <div class="auth-form">
+      <div class="auth-error" id="forgotError"></div>
+      <div class="auth-success" id="forgotSuccess"></div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input class="form-input" id="forgotEmail" type="email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')doForgot()">
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px" onclick="doForgot()">Enviar link de recuperação</button>
+      <div class="auth-link" onclick="showLogin()">← Voltar ao login</div>
+    </div>
   </div>
 </div>
 
@@ -287,6 +352,10 @@ textarea.form-input{resize:vertical;min-height:72px}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
         Gerenciar Funis
       </div>
+      <div class="nav-item" id="nav-config" onclick="showView('config',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Configurações
+      </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="theme-toggle" id="themeToggle">
@@ -303,10 +372,10 @@ textarea.form-input{resize:vertical;min-height:72px}
           Sistema
         </button>
       </div>
-      <div class="user-card" onclick="doLogout()">
+      <div class="user-card" onclick="showView('config',document.getElementById('nav-config'))">
         <div class="av" id="sbAv"></div>
         <div style="flex:1;min-width:0"><div class="user-name" id="sbName"></div><div class="user-role" id="sbRole"></div></div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="color:var(--text3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="color:var(--text3)"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
       </div>
     </div>
   </div>
@@ -419,6 +488,52 @@ textarea.form-input{resize:vertical;min-height:72px}
       </div>
     </div>
 
+    <!-- CONFIGURAÇÕES -->
+    <div id="view-config" class="content" style="display:none">
+      <div class="topbar">
+        <div class="topbar-title">Configurações</div>
+        <button class="btn btn-ghost" onclick="doLogout()" style="margin-left:auto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Sair da conta
+        </button>
+      </div>
+      <div class="settings-wrap">
+        <!-- USERS -->
+        <div class="settings-section">
+          <div class="settings-section-title" style="display:flex;align-items:center;justify-content:space-between">
+            Usuários
+            <button class="btn btn-ghost" id="newUserBtn" onclick="openNewUserModal()" style="font-size:11px;padding:5px 11px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Novo usuário
+            </button>
+          </div>
+          <div class="user-list" id="userList">
+            <div style="color:var(--text3);font-size:12px;padding:12px">Carregando usuários...</div>
+          </div>
+        </div>
+        <!-- ACCOUNT -->
+        <div class="settings-section">
+          <div class="settings-section-title">Minha conta</div>
+          <div style="display:flex;flex-direction:column;gap:10px;max-width:400px">
+            <div class="form-group">
+              <label class="form-label">Nome</label>
+              <input class="form-input" id="myName" placeholder="Seu nome">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nova senha</label>
+              <div class="input-wrap">
+                <input class="form-input" id="myNewPass" type="password" placeholder="Nova senha (mínimo 6 caracteres)">
+                <button class="input-eye" onclick="togglePass('myNewPass',this)" tabindex="-1">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+            <button class="btn btn-ghost" style="width:fit-content" onclick="updateMyAccount()">Salvar alterações</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- DETAIL PANEL -->
@@ -482,6 +597,47 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="toast" id="toast"><div class="toast-dot"></div><span id="toastMsg"></span></div>
 
 <script>
+// ============================================================
+// SUPABASE
+// ============================================================
+// ============================================================
+// AUTH & PERMISSIONS
+// ============================================================
+const PERMS_PRESETS = {
+  admin: {
+    label:'Admin', color:'#4f7cff',
+    perms:{vendas:true,servicos:true,clientes:true,criar_cards:true,editar_cards:true,excluir_cards:true,gerenciar_funis:true,configuracoes:true,gerenciar_usuarios:true}
+  },
+  vendas: {
+    label:'Vendas', color:'#22c55e',
+    perms:{vendas:true,servicos:false,clientes:true,criar_cards:true,editar_cards:true,excluir_cards:false,gerenciar_funis:false,configuracoes:false,gerenciar_usuarios:false}
+  },
+  posvenda: {
+    label:'Pós-venda', color:'#a855f7',
+    perms:{vendas:false,servicos:true,clientes:true,criar_cards:true,editar_cards:true,excluir_cards:false,gerenciar_funis:false,configuracoes:false,gerenciar_usuarios:false}
+  },
+  personalizado: {
+    label:'Personalizado', color:'#f59e0b',
+    perms:{vendas:false,servicos:false,clientes:false,criar_cards:false,editar_cards:false,excluir_cards:false,gerenciar_funis:false,configuracoes:false,gerenciar_usuarios:false}
+  }
+};
+
+const PERM_LABELS = {
+  vendas:'Ver Funil de Vendas', servicos:'Ver Funil de Serviços',
+  clientes:'Ver Clientes', criar_cards:'Criar registros',
+  editar_cards:'Editar registros', excluir_cards:'Excluir registros',
+  gerenciar_funis:'Gerenciar Funis', configuracoes:'Acessar Configurações',
+  gerenciar_usuarios:'Gerenciar Usuários'
+};
+
+let currentUserData = null; // full user object from DB
+let currentPerms = {};
+
+function hasPermission(perm) {
+  if(!currentPerms) return false;
+  return currentPerms[perm] === true;
+}
+
 // ============================================================
 // SUPABASE
 // ============================================================
@@ -553,6 +709,30 @@ async function dbSaveCol(fid,col,pos) {
 
 async function dbDeleteCol(colId) {
   await sb.from('funnel_cols').delete().eq('id',colId);
+}
+
+// USER DB HELPERS
+async function dbLoadUsers() {
+  const {data,error} = await sb.from('crm_users').select('*').order('created_at');
+  return data||[];
+}
+
+async function dbSaveUser(user) {
+  await sb.from('crm_users').upsert({
+    id:user.id, auth_id:user.auth_id||null,
+    name:user.name, email:user.email,
+    role:user.role, permissions:user.permissions,
+    active:user.active!==false
+  });
+}
+
+async function dbDeleteUser(userId) {
+  await sb.from('crm_users').delete().eq('id',userId);
+}
+
+async function dbGetUserByAuthId(authId) {
+  const {data} = await sb.from('crm_users').select('*').eq('auth_id',authId).single();
+  return data;
 }
 
 async function dbSaveCard(fid,card) {
@@ -665,7 +845,13 @@ async function doLogin(){
   const tb=document.getElementById('btn-'+currentTheme);if(tb)tb.classList.add('active');
   toast('Bem-vindo, '+u.name+'!');
 }
-function doLogout(){document.getElementById('loginScreen').style.display='flex';document.getElementById('appRoot').style.display='none';}
+async function doLogout(){
+  await sb.auth.signOut();
+  document.getElementById('authScreen').style.display='flex';
+  document.getElementById('appRoot').style.display='none';
+  currentUserData=null;currentPerms={};
+  showLogin();
+}
 
 // ============================================================
 // NAV
@@ -689,7 +875,7 @@ function buildNav(){
 // VIEWS
 // ============================================================
 function showView(name,el){
-  ['view-kanban','view-clientes','view-whatsapp','view-funis'].forEach(v=>{
+  ['view-kanban','view-clientes','view-whatsapp','view-funis','view-config'].forEach(v=>{
     const e=document.getElementById(v);if(e)e.style.display='none';
   });
   document.getElementById('view-'+name).style.display='flex';
@@ -698,6 +884,7 @@ function showView(name,el){
   closeDetail();
   if(name==='clientes')renderClients();
   if(name==='funis')renderFunisList();
+  if(name==='config')renderUserList();
 }
 
 function showFunnel(id,el){
@@ -1329,6 +1516,171 @@ function toast(msg){
   document.getElementById('toastMsg').textContent=msg;
   document.getElementById('toast').classList.add('show');
   toastTimer=setTimeout(()=>document.getElementById('toast').classList.remove('show'),3000);
+}
+
+// ============================================================
+// AUTO SESSION CHECK
+// ============================================================
+(async function checkSession(){
+  const {data:{session}} = await sb.auth.getSession();
+  if(session){
+    await initApp(session.user);
+  }
+  // Listen for auth changes
+  sb.auth.onAuthStateChange(async(event,session)=>{
+    if(event==='PASSWORD_RECOVERY'&&session){
+      document.getElementById('authScreen').style.display='none';
+      document.getElementById('appRoot').style.display='none';
+      const newPass=prompt('Digite sua nova senha (mínimo 6 caracteres):');
+      if(newPass&&newPass.length>=6){
+        const {error}=await sb.auth.updateUser({password:newPass});
+        if(!error){alert('Senha alterada com sucesso! Faça login.');await sb.auth.signOut();}
+        else alert('Erro: '+error.message);
+      }
+      document.getElementById('authScreen').style.display='flex';
+    }
+  });
+})();
+
+// ============================================================
+// SETTINGS - USERS
+// ============================================================
+async function renderUserList() {
+  if(!hasPermission('gerenciar_usuarios')){
+    document.getElementById('userList').innerHTML='<div style="font-size:12px;color:var(--text3);padding:12px">Sem permissão para gerenciar usuários.</div>';
+    document.getElementById('newUserBtn').style.display='none';
+    return;
+  }
+  const users = await dbLoadUsers();
+  const list = document.getElementById('userList');
+  if(!users.length){list.innerHTML='<div style="font-size:12px;color:var(--text3);padding:12px">Nenhum usuário cadastrado ainda.</div>';return;}
+  list.innerHTML = users.map(u=>{
+    const preset=PERMS_PRESETS[u.role]||PERMS_PRESETS.personalizado;
+    const initials=u.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const isMe=u.id===currentUserData?.id;
+    return `<div class="user-list-item">
+      <div class="av" style="background:${preset.color}25;color:${preset.color}">${initials}</div>
+      <div style="flex:1;min-width:0">
+        <div class="user-list-name">${u.name}${isMe?' <span style="font-size:10px;color:var(--text3)">(você)</span>':''}</div>
+        <div class="user-list-email">${u.email}</div>
+      </div>
+      <div class="user-list-role" style="background:${preset.color}20;color:${preset.color}">${preset.label||u.role}</div>
+      ${!u.active?'<span class="inactive-badge">Inativo</span>':''}
+      ${!isMe?`<button class="card-btn" onclick="editUserModal('${u.id}')" title="Editar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z"/></svg></button>`:''}
+    </div>`;
+  }).join('');
+}
+
+async function openNewUserModal() {
+  document.getElementById('modalTitle').textContent='Novo Usuário';
+  document.getElementById('modalBody').innerHTML=`
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Nome *</label><input class="form-input" id="un" placeholder="Nome completo"></div>
+      <div class="form-group"><label class="form-label">E-mail *</label><input class="form-input" id="ue" type="email" placeholder="email@exemplo.com"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Senha inicial *</label>
+      <div class="input-wrap"><input class="form-input" id="up" type="password" placeholder="Mínimo 6 caracteres"><button class="input-eye" onclick="togglePass('up',this)" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Perfil base</label>
+      <div class="profile-preset" id="presetBtns">
+        ${Object.entries(PERMS_PRESETS).map(([k,v])=>`<button class="preset-btn${k==='vendas'?' active':''}" onclick="applyPreset('${k}',this)">${v.label}</button>`).join('')}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Permissões</label>
+      <div class="perm-grid" id="permGrid">
+        ${Object.entries(PERM_LABELS).map(([k,v])=>`<div class="perm-item"><input type="checkbox" id="perm_${k}" ${PERMS_PRESETS.vendas.perms[k]?'checked':''}><label for="perm_${k}" style="cursor:pointer">${v}</label></div>`).join('')}
+      </div>
+    </div>`;
+  modalCallback=async()=>{
+    const name=document.getElementById('un').value.trim();
+    const email=document.getElementById('ue').value.trim();
+    const pass=document.getElementById('up').value;
+    if(!name||!email||!pass){toast('Preencha todos os campos obrigatórios','err');return;}
+    if(pass.length<6){toast('Senha deve ter pelo menos 6 caracteres','err');return;}
+    showLoading('Criando usuário...');
+    // Create auth user via admin (using service role would be needed for real prod - for now create and save profile)
+    const {data,error}=await sb.auth.signUp({email,password:pass,options:{data:{name}}});
+    if(error){hideLoading();toast('Erro: '+error.message,'err');return;}
+    const perms={};
+    Object.keys(PERM_LABELS).forEach(k=>{perms[k]=document.getElementById('perm_'+k)?.checked||false;});
+    const activePreset=document.querySelector('.preset-btn.active')?.textContent||'Personalizado';
+    const role=Object.entries(PERMS_PRESETS).find(([k,v])=>v.label===activePreset)?.[0]||'personalizado';
+    const newUser={id:'user_'+Date.now(),auth_id:data.user?.id||null,name,email,role,permissions:perms,active:true};
+    await dbSaveUser(newUser);
+    hideLoading();closeModal();renderUserList();toast('Usuário criado! Ele receberá um e-mail de confirmação.');
+  };
+  document.getElementById('modalSaveBtn').onclick=modalCallback;
+  openModal();setTimeout(()=>document.getElementById('un').focus(),200);
+}
+
+async function editUserModal(userId) {
+  const users=await dbLoadUsers();
+  const u=users.find(x=>x.id===userId);if(!u)return;
+  const preset=Object.entries(PERMS_PRESETS).find(([k,v])=>k===u.role)||['personalizado',PERMS_PRESETS.personalizado];
+  document.getElementById('modalTitle').textContent='Editar Usuário — '+u.name;
+  document.getElementById('modalBody').innerHTML=`
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Nome *</label><input class="form-input" id="un" value="${u.name}"></div>
+      <div class="form-group"><label class="form-label">Status</label><select class="form-input" id="ustatus"><option value="true" ${u.active!==false?'selected':''}>Ativo</option><option value="false" ${u.active===false?'selected':''}>Inativo</option></select></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Perfil base</label>
+      <div class="profile-preset" id="presetBtns">
+        ${Object.entries(PERMS_PRESETS).map(([k,v])=>`<button class="preset-btn${k===u.role?' active':''}" onclick="applyPreset('${k}',this)">${v.label}</button>`).join('')}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Permissões</label>
+      <div class="perm-grid" id="permGrid">
+        ${Object.entries(PERM_LABELS).map(([k,v])=>`<div class="perm-item"><input type="checkbox" id="perm_${k}" ${u.permissions?.[k]?'checked':''}><label for="perm_${k}" style="cursor:pointer">${v}</label></div>`).join('')}
+      </div>
+    </div>
+    <button class="btn btn-danger" style="margin-top:4px" onclick="deleteUserConfirm('${u.id}','${u.name}')">Excluir usuário</button>`;
+  modalCallback=async()=>{
+    const name=document.getElementById('un').value.trim();if(!name)return;
+    const perms={};
+    Object.keys(PERM_LABELS).forEach(k=>{perms[k]=document.getElementById('perm_'+k)?.checked||false;});
+    const activePreset=document.querySelector('.preset-btn.active')?.textContent||'Personalizado';
+    const role=Object.entries(PERMS_PRESETS).find(([k,v])=>v.label===activePreset)?.[0]||'personalizado';
+    const active=document.getElementById('ustatus').value==='true';
+    await dbSaveUser({...u,name,role,permissions:perms,active});
+    closeModal();renderUserList();toast('Usuário atualizado!');
+  };
+  document.getElementById('modalSaveBtn').onclick=modalCallback;openModal();
+}
+
+function deleteUserConfirm(id,name){
+  confirm('Excluir "'+name+'"?','O usuário perderá acesso ao sistema.',async()=>{
+    await dbDeleteUser(id);closeModal();renderUserList();toast('Usuário removido!');
+  });
+}
+
+function applyPreset(key, btn) {
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const p=PERMS_PRESETS[key];if(!p)return;
+  Object.entries(p.perms).forEach(([k,v])=>{const el=document.getElementById('perm_'+k);if(el)el.checked=v;});
+}
+
+async function updateMyAccount() {
+  const name=document.getElementById('myName').value.trim();
+  const newPass=document.getElementById('myNewPass').value;
+  if(!name){toast('Informe seu nome','err');return;}
+  showLoading('Salvando...');
+  if(newPass){
+    if(newPass.length<6){hideLoading();toast('Senha deve ter pelo menos 6 caracteres','err');return;}
+    const {error}=await sb.auth.updateUser({password:newPass});
+    if(error){hideLoading();toast('Erro ao alterar senha: '+error.message,'err');return;}
+  }
+  if(currentUserData){
+    currentUserData.name=name;
+    await dbSaveUser(currentUserData);
+    document.getElementById('sbName').textContent=name;
+  }
+  hideLoading();document.getElementById('myNewPass').value='';toast('Conta atualizada!');
 }
 
 // ============================================================
