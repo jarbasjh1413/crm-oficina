@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0045)file:///C:/Users/Samsung/Downloads/index.html -->
+<html lang="pt-BR" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM — Oficina Informática</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./CRM — Oficina Informática_files/supabase-js@2"></script>
+<link href="./CRM — Oficina Informática_files/css2" rel="stylesheet">
 <style>
 :root{
   --bg:#0f0f11;--bg2:#161618;--bg3:#1e1e21;--bg4:#262629;--bg5:#2e2e32;
@@ -232,6 +233,7 @@ textarea.form-input{resize:vertical;min-height:72px}
 
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -240,19 +242,19 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-logo">
-      <div class="login-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
+      <div class="login-logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"></path></svg></div>
       <div><div class="login-title">CRM Oficina</div><div class="login-sub">Selecione seu perfil</div></div>
     </div>
     <div class="user-opts">
-      <div class="user-opt sel" onclick="selUser(this,'jarbas')">
+      <div class="user-opt sel" onclick="selUser(this,&#39;jarbas&#39;)">
         <div class="av" style="background:rgba(79,124,255,.2);color:#4f7cff;width:32px;height:32px">JA</div>
         <div><div class="user-opt-name">Jarbas</div><div class="user-opt-role">Administrador</div></div>
       </div>
-      <div class="user-opt" onclick="selUser(this,'jailson')">
+      <div class="user-opt" onclick="selUser(this,&#39;jailson&#39;)">
         <div class="av" style="background:rgba(34,197,94,.2);color:#22c55e;width:32px;height:32px">JL</div>
-        <div><div class="user-opt-name">Jailson</div><div class="user-opt-role">Vendas & Orçamentos</div></div>
+        <div><div class="user-opt-name">Jailson</div><div class="user-opt-role">Vendas &amp; Orçamentos</div></div>
       </div>
-      <div class="user-opt" onclick="selUser(this,'vitor')">
+      <div class="user-opt" onclick="selUser(this,&#39;vitor&#39;)">
         <div class="av" style="background:rgba(168,85,247,.2);color:#a855f7;width:32px;height:32px">VI</div>
         <div><div class="user-opt-name">Vitor</div><div class="user-opt-role">Pós-venda</div></div>
       </div>
@@ -266,45 +268,45 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="app" id="appRoot" style="display:none">
   <div class="sidebar">
     <div class="logo">
-      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"/></svg></div>
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zm-9 13H7v-2h4v2zm6-4H7v-2h10v2zm0-4H7V6h10v2z"></path></svg></div>
       <div><div class="logo-text">CRM Oficina</div><div class="logo-sub">Informática</div></div>
     </div>
     <nav class="nav">
       <div class="nav-label">Funis</div>
       <div id="navFunnels"></div>
       <div class="nav-label" style="margin-top:14px">Outros</div>
-      <div class="nav-item" onclick="showView('clientes',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      <div class="nav-item" onclick="showView(&#39;clientes&#39;,this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
         Clientes
       </div>
-      <div class="nav-item" onclick="showView('whatsapp',this)">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2zm0 17.25a7.734 7.734 0 01-3.946-1.081l-.283-.168-2.937.824.836-2.875-.185-.295A7.718 7.718 0 013.75 11.5c0-4.274 3.476-7.75 7.75-7.75s7.75 3.476 7.75 7.75-3.476 7.75-7.75 7.75z"/></svg>
+      <div class="nav-item" onclick="showView(&#39;whatsapp&#39;,this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2zm0 17.25a7.734 7.734 0 01-3.946-1.081l-.283-.168-2.937.824.836-2.875-.185-.295A7.718 7.718 0 013.75 11.5c0-4.274 3.476-7.75 7.75-7.75s7.75 3.476 7.75 7.75-3.476 7.75-7.75 7.75z"></path></svg>
         WhatsApp
       </div>
-      <div class="nav-item" onclick="showView('funis',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+      <div class="nav-item" onclick="showView(&#39;funis&#39;,this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"></path></svg>
         Gerenciar Funis
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="theme-toggle" id="themeToggle">
-        <button class="theme-btn active" id="btn-light" onclick="setTheme('light')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <button class="theme-btn active" id="btn-light" onclick="setTheme(&#39;light&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
           Claro
         </button>
-        <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <button class="theme-btn" id="btn-dark" onclick="setTheme(&#39;dark&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
           Escuro
         </button>
-        <button class="theme-btn" id="btn-system" onclick="setTheme('system')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <button class="theme-btn" id="btn-system" onclick="setTheme(&#39;system&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
           Sistema
         </button>
       </div>
       <div class="user-card" onclick="doLogout()">
         <div class="av" id="sbAv"></div>
         <div style="flex:1;min-width:0"><div class="user-name" id="sbName"></div><div class="user-role" id="sbRole"></div></div>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="color:var(--text3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" style="color:var(--text3)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path></svg>
       </div>
     </div>
   </div>
@@ -316,28 +318,28 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="topbar">
         <div class="topbar-title" id="kanbanTitle"></div>
         <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
           <input type="text" placeholder="Buscar..." oninput="filterKanban(this.value)">
         </div>
         <button class="btn btn-ghost" id="filterToggleBtn" onclick="toggleFilterBar()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
           Filtrar
         </button>
         <button class="btn btn-ghost" onclick="openCardModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           Adicionar
         </button>
       </div>
       <div class="stats-bar" id="kanbanStats"></div>
       <div class="kanban-filters" id="kanbanFilters" style="display:none">
         <span class="kf-label">Temp:</span>
-        <button class="kf-chip hot" id="kf-quente" onclick="toggleKFilter('quente')">Quente</button>
-        <button class="kf-chip warm" id="kf-morno" onclick="toggleKFilter('morno')">Morno</button>
-        <button class="kf-chip cold" id="kf-frio" onclick="toggleKFilter('frio')">Frio</button>
+        <button class="kf-chip hot" id="kf-quente" onclick="toggleKFilter(&#39;quente&#39;)">Quente</button>
+        <button class="kf-chip warm" id="kf-morno" onclick="toggleKFilter(&#39;morno&#39;)">Morno</button>
+        <button class="kf-chip cold" id="kf-frio" onclick="toggleKFilter(&#39;frio&#39;)">Frio</button>
         <div class="kf-divider"></div>
         <span class="kf-label">Cat:</span>
-        <button class="kf-chip catA" id="kf-A" onclick="toggleKFilter('A')">Cat. A</button>
-        <button class="kf-chip catB" id="kf-B" onclick="toggleKFilter('B')">Cat. B</button>
+        <button class="kf-chip catA" id="kf-A" onclick="toggleKFilter(&#39;A&#39;)">Cat. A</button>
+        <button class="kf-chip catB" id="kf-B" onclick="toggleKFilter(&#39;B&#39;)">Cat. B</button>
         <button class="kf-chip" style="margin-left:auto;font-size:10px" onclick="clearKFilters()">Limpar filtros</button>
       </div>
       <div class="kanban-wrap"><div class="kanban" id="kanbanBoard"></div></div>
@@ -348,11 +350,11 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="topbar">
         <div class="topbar-title">Clientes</div>
         <div class="search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
           <input type="text" placeholder="Buscar cliente..." id="clientSearch" oninput="renderClients()">
         </div>
         <button class="btn btn-ghost" id="toggleViewBtn" onclick="toggleClientView()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
           Grade
         </button>
       </div>
@@ -386,19 +388,19 @@ textarea.form-input{resize:vertical;min-height:72px}
         <div class="wa-dot"></div>
         <span style="font-size:11px;color:var(--text3)">Conectado via WhatsApp Web</span>
         <button class="btn btn-ghost" onclick="reloadWA()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path></svg>
           Recarregar
         </button>
       </div>
       <div class="wa-frame-wrap">
-        <iframe id="waFrame" src="https://web.whatsapp.com" title="WhatsApp Web" allow="microphone; camera"></iframe>
-        <div class="wa-loading" id="waLoading">
+        <iframe id="waFrame" src="./CRM — Oficina Informática_files/saved_resource.html" title="WhatsApp Web" allow="microphone; camera"></iframe>
+        <div class="wa-loading" id="waLoading" style="display: none;">
           <div class="wa-loading-icon">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M11.5 2C6.262 2 2 6.262 2 11.5c0 1.922.562 3.71 1.528 5.214L2 22l5.4-1.516A9.461 9.461 0 0011.5 21C16.738 21 21 16.738 21 11.5S16.738 2 11.5 2z"></path></svg>
           </div>
           <div style="font-size:13px;font-weight:500">Carregando WhatsApp Web...</div>
           <div style="font-size:11px;color:var(--text3);text-align:center;max-width:260px;line-height:1.6">Aguarde o QR Code aparecer, aponte a câmera do celular para escanear</div>
-          <button class="btn btn-ghost" onclick="document.getElementById('waLoading').style.display='none'" style="margin-top:4px">Já carreguei</button>
+          <button class="btn btn-ghost" onclick="document.getElementById(&#39;waLoading&#39;).style.display=&#39;none&#39;" style="margin-top:4px">Já carreguei</button>
         </div>
       </div>
     </div>
@@ -408,7 +410,7 @@ textarea.form-input{resize:vertical;min-height:72px}
       <div class="topbar">
         <div class="topbar-title">Gerenciar Funis</div>
         <button class="btn btn-ghost" onclick="openNewFunnelModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           Novo Funil
         </button>
       </div>
@@ -428,13 +430,13 @@ textarea.form-input{resize:vertical;min-height:72px}
         <div class="detail-contact" id="dpContact"></div>
       </div>
       <button class="close-btn" onclick="closeDetail()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
     <div class="tabs" id="dpTabs">
-      <div class="tab active" onclick="switchTab(this,'resumo')">Resumo</div>
-      <div class="tab" onclick="switchTab(this,'historico')">Histórico</div>
-      <div class="tab" onclick="switchTab(this,'orcamentos')">Orçamentos</div>
+      <div class="tab active" onclick="switchTab(this,&#39;resumo&#39;)">Resumo</div>
+      <div class="tab" onclick="switchTab(this,&#39;historico&#39;)">Histórico</div>
+      <div class="tab" onclick="switchTab(this,&#39;orcamentos&#39;)">Orçamentos</div>
     </div>
     <div class="detail-body">
       <div class="tab-content active" id="tab-resumo"></div>
@@ -450,7 +452,7 @@ textarea.form-input{resize:vertical;min-height:72px}
     <div class="modal-header">
       <div class="modal-title" id="modalTitle">Modal</div>
       <button class="close-btn" onclick="closeModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
     <div class="modal-body" id="modalBody"></div>
@@ -465,7 +467,7 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="overlay" id="confirmOverlay">
   <div class="confirm-box">
     <div class="confirm-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" width="20" height="20"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" width="20" height="20"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6M14 11v6"></path><path d="M9 6V4h6v2"></path></svg>
     </div>
     <div class="confirm-title" id="confirmTitle">Confirmar exclusão</div>
     <div class="confirm-sub" id="confirmSub">Esta ação não pode ser desfeita.</div>
@@ -480,6 +482,107 @@ textarea.form-input{resize:vertical;min-height:72px}
 <div class="toast" id="toast"><div class="toast-dot"></div><span id="toastMsg"></span></div>
 
 <script>
+// ============================================================
+// SUPABASE
+// ============================================================
+const SUPABASE_URL = 'https://sbyrsoeqdubwlumsuzav.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_sM3r0ZaY9oBof2eqm9FGow_v1_OilfF';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// DB HELPERS
+async function dbLoadAll() {
+  try {
+    const [{data:fs},{data:cols},{data:cards}] = await Promise.all([
+      sb.from('funnels').select('*').order('position'),
+      sb.from('funnel_cols').select('*').order('position'),
+      sb.from('cards').select('*').order('criado')
+    ]);
+    if(fs && fs.length > 0) {
+      funnels = fs.map(f => ({
+        ...f,
+        cols: cols.filter(c=>c.funnel_id===f.id).map(c=>({id:c.id,name:c.name,color:c.color})),
+        cards: cards.filter(c=>c.funnel_id===f.id).map(c=>({
+          id:c.id, nome:c.nome, tel:c.tel||'', origem:c.origem||'',
+          temp:c.temp||'', cat:c.cat||'', aparelho:c.aparelho||'',
+          prob:c.prob||'', osNumero:c.os_numero||'', notas:c.notas||'',
+          resp:c.resp||'jarbas', col:c.col_id,
+          criado:new Date(c.criado),
+          orcamentos:c.orcamentos||[], historico:c.historico||[]
+        }))
+      }));
+    } else {
+      // First time: seed default funnels
+      await dbSeedDefaults();
+    }
+  } catch(e) { console.error('Load error',e); }
+}
+
+async function dbSeedDefaults() {
+  const defaultFunnels = [
+    {id:'vendas',name:'Funil de Vendas',color:'#4f7cff',type:'vendas',position:0},
+    {id:'servicos',name:'Funil de Serviços',color:'#a855f7',type:'servicos',position:1}
+  ];
+  const defaultCols = [
+    {id:'novo',funnel_id:'vendas',name:'Novo Lead',color:'#5a5a68',position:0},
+    {id:'qualificando',funnel_id:'vendas',name:'Qualificando',color:'#f59e0b',position:1},
+    {id:'negociacao',funnel_id:'vendas',name:'Negociação',color:'#4f7cff',position:2},
+    {id:'reservou',funnel_id:'vendas',name:'Reservou',color:'#a855f7',position:3},
+    {id:'fechado',funnel_id:'vendas',name:'Fechado / Pago',color:'#22c55e',position:4},
+    {id:'posvenda',funnel_id:'vendas',name:'Pós-venda',color:'#14b8a6',position:5},
+    {id:'perdido',funnel_id:'vendas',name:'Perdido',color:'#ef4444',position:6},
+    {id:'contato',funnel_id:'servicos',name:'Novo Contato',color:'#5a5a68',position:0},
+    {id:'agendamento',funnel_id:'servicos',name:'Agendamento',color:'#f59e0b',position:1},
+    {id:'diagnostico',funnel_id:'servicos',name:'Em Diagnóstico',color:'#4f7cff',position:2},
+    {id:'orc_passado',funnel_id:'servicos',name:'Orçamento Passado',color:'#a855f7',position:3},
+    {id:'orc_autorizado',funnel_id:'servicos',name:'Orc. Autorizado',color:'#ec4899',position:4},
+    {id:'concluido',funnel_id:'servicos',name:'Concluído / Aguard.',color:'#14b8a6',position:5},
+    {id:'entregue',funnel_id:'servicos',name:'Entregue / Pago',color:'#22c55e',position:6}
+  ];
+  await sb.from('funnels').insert(defaultFunnels);
+  await sb.from('funnel_cols').insert(defaultCols);
+  funnels = defaultFunnels.map(f=>({...f,cols:defaultCols.filter(c=>c.funnel_id===f.id).map(c=>({id:c.id,name:c.name,color:c.color})),cards:[]}));
+}
+
+async function dbSaveFunnel(f) {
+  await sb.from('funnels').upsert({id:f.id,name:f.name,color:f.color,type:f.type,position:funnels.indexOf(f)});
+}
+
+async function dbSaveCol(fid,col,pos) {
+  await sb.from('funnel_cols').upsert({id:col.id,funnel_id:fid,name:col.name,color:col.color,position:pos});
+}
+
+async function dbDeleteCol(colId) {
+  await sb.from('funnel_cols').delete().eq('id',colId);
+}
+
+async function dbSaveCard(fid,card) {
+  await sb.from('cards').upsert({
+    id:card.id, funnel_id:fid, col_id:card.col,
+    nome:card.nome, tel:card.tel||null, origem:card.origem||null,
+    temp:card.temp||null, cat:card.cat||null,
+    aparelho:card.aparelho||null, prob:card.prob||null,
+    os_numero:card.osNumero||null, notas:card.notas||null,
+    resp:card.resp, criado:card.criado,
+    orcamentos:card.orcamentos, historico:card.historico
+  });
+}
+
+async function dbDeleteCard(cardId) {
+  await sb.from('cards').delete().eq('id',cardId);
+}
+
+async function dbDeleteFunnel(fid) {
+  await sb.from('funnels').delete().eq('id',fid);
+}
+
+// Loading overlay
+function showLoading(msg) {
+  let el=document.getElementById('loadingOverlay');
+  if(!el){el=document.createElement('div');el.id='loadingOverlay';el.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:12px';el.innerHTML=`<div style="width:36px;height:36px;border:3px solid #4f7cff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite"></div><div style="color:#f0f0f2;font-size:13px">${msg||'Carregando...'}</div>`;document.body.appendChild(el);}
+  el.style.display='flex';
+}
+function hideLoading(){const el=document.getElementById('loadingOverlay');if(el)el.style.display='none';}
+
 // ============================================================
 // DATA
 // ============================================================
@@ -543,7 +646,7 @@ let funnels = [
 // LOGIN
 // ============================================================
 function selUser(el,key){document.querySelectorAll('.user-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');loginSel=key;}
-function doLogin(){
+async function doLogin(){
   currentUser=loginSel;
   const u=USERS[currentUser];
   document.getElementById('loginScreen').style.display='none';
@@ -553,9 +656,11 @@ function doLogin(){
   av.style.width='30px';av.style.height='30px';
   document.getElementById('sbName').textContent=u.name;
   document.getElementById('sbRole').textContent=u.role;
+  showLoading('Carregando dados...');
+  await dbLoadAll();
+  hideLoading();
   buildNav();
   showFunnel('vendas');
-  // sync theme button UI
   document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
   const tb=document.getElementById('btn-'+currentTheme);if(tb)tb.classList.add('active');
   toast('Bem-vindo, '+u.name+'!');
@@ -747,7 +852,7 @@ function setupColDrop(colEl,f){
       card.historico=card.historico||[];
       card.historico.push({text:`Movido de "${oldCol?oldCol.name:'—'}" para "${newCol?newCol.name:'—'}"`,time:new Date()});
       card.col=targetCol;
-      renderKanban(ff);renderStats(ff);buildNav();toast('Card movido!');
+      renderKanban(ff);renderStats(ff);buildNav();toast('Card movido!');dbSaveCard(ff.id,card);
       if(activeDetailId===cardId)openDetail(cardId,funnelId);
     }
   });
@@ -797,7 +902,7 @@ function openCardModal(preCol){
     const card={id:Date.now(),nome,tel:document.getElementById('ftel').value,col:document.getElementById('fcol').value,resp:document.getElementById('fresp').value,criado:new Date(),notas:document.getElementById('fnota').value,orcamentos:[],historico:[]};
     if(isV){card.temp=document.getElementById('ftemp').value;card.cat=document.getElementById('fcat').value;card.origem=document.getElementById('forig').value;}
     else{card.aparelho=document.getElementById('fap').value;card.prob=document.getElementById('fprob').value;card.osNumero=document.getElementById('fosnum').value.trim();}
-    f.cards.push(card);renderKanban(f);renderStats(f);buildNav();closeModal();toast('Registro criado!');
+    f.cards.push(card);renderKanban(f);renderStats(f);buildNav();closeModal();toast('Registro criado!');dbSaveCard(f.id,card);
   };
   document.getElementById('modalSaveBtn').onclick=modalCallback;
   openModal();setTimeout(()=>document.getElementById('fn').focus(),200);
@@ -838,7 +943,7 @@ function editCardModal(id,fid,e){
     card.notas=document.getElementById('fnota').value;
     if(isV){card.temp=document.getElementById('ftemp').value;card.cat=document.getElementById('fcat').value;card.origem=document.getElementById('forig').value;}
     else{card.aparelho=document.getElementById('fap').value;card.prob=document.getElementById('fprob').value;card.osNumero=document.getElementById('fosnum').value.trim();}
-    renderKanban(f);renderStats(f);buildNav();closeModal();toast('Registro atualizado!');
+    renderKanban(f);renderStats(f);buildNav();closeModal();toast('Registro atualizado!');dbSaveCard(f.id,card);
     if(activeDetailId===id)openDetail(id,fid);
   };
   document.getElementById('modalSaveBtn').onclick=modalCallback;
@@ -850,7 +955,7 @@ function deleteCard(id,fid,e){
   const f=funnels.find(x=>x.id===fid);const card=f&&f.cards.find(c=>c.id===id);if(!card)return;
   confirm('Excluir "'+card.nome+'"?','Esta ação não pode ser desfeita.',()=>{
     f.cards=f.cards.filter(c=>c.id!==id);
-    renderKanban(f);renderStats(f);buildNav();toast('Registro excluído!');
+    renderKanban(f);renderStats(f);buildNav();toast('Registro excluído!');dbDeleteCard(id);
     if(activeDetailId===id)closeDetail();
   });
 }
@@ -868,7 +973,7 @@ function editColModal(fid,colId){
   modalCallback=()=>{
     col.name=document.getElementById('colName').value||col.name;
     const selC=document.querySelector('.color-opt.sel');if(selC)col.color=selC.style.background;
-    renderKanban(f);closeModal();toast('Etapa atualizada!');
+    renderKanban(f);closeModal();toast('Etapa atualizada!');dbSaveCol(f.id,col,f.cols.indexOf(col));
   };
   document.getElementById('modalSaveBtn').onclick=modalCallback;openModal();
 }
@@ -882,8 +987,9 @@ function addColModal(fid){
   modalCallback=()=>{
     const name=document.getElementById('colName').value.trim();if(!name){toast('Informe o nome','err');return;}
     const selC=document.querySelector('.color-opt.sel');
-    f.cols.push({id:'col_'+Date.now(),name,color:selC?selC.style.background:COLORS[0]});
-    renderKanban(f);closeModal();toast('Etapa criada!');
+    const newCol={id:'col_'+Date.now(),name,color:selC?selC.style.background:COLORS[0]};
+    f.cols.push(newCol);
+    renderKanban(f);closeModal();toast('Etapa criada!');dbSaveCol(f.id,newCol,f.cols.length-1);
   };
   document.getElementById('modalSaveBtn').onclick=modalCallback;openModal();setTimeout(()=>document.getElementById('colName').focus(),200);
 }
@@ -892,7 +998,7 @@ function deleteCol(fid,colId){
   const f=funnels.find(x=>x.id===fid);
   const count=f.cards.filter(c=>c.col===colId).length;
   if(count>0){toast('Mova os '+count+' card(s) antes de excluir','err');return;}
-  f.cols=f.cols.filter(c=>c.id!==colId);renderKanban(f);closeModal();toast('Etapa removida!');
+  f.cols=f.cols.filter(c=>c.id!==colId);renderKanban(f);closeModal();toast('Etapa removida!');dbDeleteCol(colId);
 }
 
 function selColor(el){
@@ -924,8 +1030,10 @@ function openNewFunnelModal(){
     const name=document.getElementById('fn').value.trim();if(!name){toast('Informe o nome','err');return;}
     const selC=document.querySelector('.color-opt.sel');
     const id='funil_'+Date.now();
-    funnels.push({id,name,color:selC?selC.style.background:COLORS[0],type:document.getElementById('ftype').value,cols:[{id:'novo',name:'Novo',color:'#5a5a68'},{id:'em_andamento',name:'Em andamento',color:'#4f7cff'},{id:'concluido',name:'Concluído',color:'#22c55e'}],cards:[]});
+    const newF={id,name,color:selC?selC.style.background:COLORS[0],type:document.getElementById('ftype').value,cols:[{id:'col_'+Date.now()+'_1',name:'Novo',color:'#5a5a68'},{id:'col_'+Date.now()+'_2',name:'Em andamento',color:'#4f7cff'},{id:'col_'+Date.now()+'_3',name:'Concluído',color:'#22c55e'}],cards:[]};
+    funnels.push(newF);
     buildNav();renderFunisList();closeModal();toast('Funil criado!');
+    dbSaveFunnel(newF);newF.cols.forEach((c,i)=>dbSaveCol(id,c,i));
   };
   document.getElementById('modalSaveBtn').onclick=modalCallback;openModal();setTimeout(()=>document.getElementById('fn').focus(),200);
 }
@@ -940,14 +1048,14 @@ function editFunnelModal(fid){
   modalCallback=()=>{
     f.name=document.getElementById('fn').value.trim()||f.name;
     const selC=document.querySelector('.color-opt.sel');if(selC)f.color=selC.style.background;
-    buildNav();renderFunisList();closeModal();toast('Funil atualizado!');
+    buildNav();renderFunisList();closeModal();toast('Funil atualizado!');dbSaveFunnel(f);
   };
   document.getElementById('modalSaveBtn').onclick=modalCallback;openModal();
 }
 
 function deleteFunnel(fid){
   confirm('Excluir este funil?','Todos os registros serão perdidos.',()=>{
-    funnels=funnels.filter(f=>f.id!==fid);buildNav();renderFunisList();closeModal();toast('Funil excluído!');
+    funnels=funnels.filter(f=>f.id!==fid);buildNav();renderFunisList();closeModal();toast('Funil excluído!');dbDeleteFunnel(fid);
   });
 }
 
@@ -1069,15 +1177,15 @@ function renderTabOrcamentos(card,f){
     </div>`;
 }
 
-function quickMove(id,fid,col){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){const old=f.cols.find(x=>x.id===c.col);const nw=f.cols.find(x=>x.id===col);c.historico=c.historico||[];c.historico.push({text:`Movido de "${old?old.name:'—'}" para "${nw?nw.name:'—'}"`,time:new Date(),icon:'move'});c.col=col;renderKanban(f);renderStats(f);toast('Etapa atualizada!');}}
-function quickResp(id,fid,resp){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){c.resp=resp;renderKanban(f);toast('Responsável atualizado!');}}
-function quickTemp(id,fid,temp){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){c.temp=temp;renderKanban(f);renderStats(f);toast('Temperatura atualizada!');}}
-function quickCat(id,fid,cat){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){c.cat=cat;renderKanban(f);toast('Categoria atualizada!');}}
+function quickMove(id,fid,col){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){const old=f.cols.find(x=>x.id===c.col);const nw=f.cols.find(x=>x.id===col);c.historico=c.historico||[];c.historico.push({text:`Movido de "${old?old.name:'—'}" para "${nw?nw.name:'—'}"`,time:new Date(),icon:'move'});c.col=col;renderKanban(f);renderStats(f);toast('Etapa atualizada!');dbSaveCard(f.id,c);}}
+function quickResp(id,fid,resp){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){c.resp=resp;renderKanban(f);toast('Responsável atualizado!');dbSaveCard(f.id,c);}}
+function quickTemp(id,fid,temp){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){c.temp=temp;renderKanban(f);renderStats(f);toast('Temperatura atualizada!');dbSaveCard(f.id,c);}}
+function quickCat(id,fid,cat){const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(c){c.cat=cat;renderKanban(f);toast('Categoria atualizada!');dbSaveCard(f.id,c);}}
 
 function addNota(id,fid){
   const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);
   const txt=document.getElementById('novaNota').value.trim();
-  if(c&&txt){c.historico=c.historico||[];c.historico.push({text:txt,time:new Date(),icon:'note'});c.notas=(c.notas?c.notas+'\n':'')+txt;toast('Anotação salva!');renderTabHistorico(c,f);}
+  if(c&&txt){c.historico=c.historico||[];c.historico.push({text:txt,time:new Date(),icon:'note'});c.notas=(c.notas?c.notas+'\n':'')+txt;toast('Anotação salva!');dbSaveCard(f.id,c);renderTabHistorico(c,f);}
 }
 
 function addOrc(id,fid){
@@ -1085,12 +1193,12 @@ function addOrc(id,fid){
   const nome=document.getElementById('orcNome').value.trim();
   const val=document.getElementById('orcVal').value.trim();
   const status=document.getElementById('orcStatus').value;
-  if(c&&nome){c.orcamentos.push({nome,val,status});renderTabOrcamentos(c,f);renderKanban(f);toast('Orçamento registrado!');}
+  if(c&&nome){c.orcamentos.push({nome,val,status});renderTabOrcamentos(c,f);renderKanban(f);toast('Orçamento registrado!');dbSaveCard(f.id,c);}
 }
 
 function deleteOrc(id,fid,idx){
   const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);
-  if(c){c.orcamentos.splice(idx,1);renderTabOrcamentos(c,f);renderKanban(f);toast('Orçamento removido!');}
+  if(c){c.orcamentos.splice(idx,1);renderTabOrcamentos(c,f);renderKanban(f);toast('Orçamento removido!');dbSaveCard(f.id,c);}
 }
 
 function followUp(nome,tel){
@@ -1175,7 +1283,7 @@ function deleteClientCard(e,id,fid){
   e.stopPropagation();
   const f=funnels.find(x=>x.id===fid);const c=f&&f.cards.find(x=>x.id===id);if(!c)return;
   confirm('Excluir "'+c.nome+'"?','Esta ação não pode ser desfeita.',()=>{
-    f.cards=f.cards.filter(x=>x.id!==id);buildNav();renderClients();toast('Registro excluído!');
+    f.cards=f.cards.filter(x=>x.id!==id);buildNav();renderClients();toast('Registro excluído!');dbDeleteCard(id);
   });
 }
 
@@ -1308,5 +1416,6 @@ function updateColCounts(){
   });
 }
 </script>
-</body>
-</html>
+
+
+</body></html>
